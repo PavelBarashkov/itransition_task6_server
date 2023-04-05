@@ -54,7 +54,7 @@
       async getMessagesRecipient(req, res) {
           try {
               const messages = await Message.findAll({
-                where: { recipientid: req.body.recipientId },
+                where: { recipientid: req.query.recipientId },
                 include: [
                   { model: User, as: 'sender', attributes: ['name'] },
                   { model: User, as: 'recipient', attributes: ['name'] },
