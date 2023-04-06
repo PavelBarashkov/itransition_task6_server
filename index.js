@@ -13,9 +13,9 @@ const WebSocket = require( "ws");
 
 const PORT = process.env.PORT || 5000;
 
-const server = http.createServer();
+const app = express();
+const server = http.createServer(app);
 
-const app = express({server});
 
 
 
@@ -54,7 +54,7 @@ const start = async () => {
     try{
         await sequelize.authenticate(); // Подключение к базе данных
         await sequelize.sync() // Сверяет состояние базы данных со схемой в базе данных
-        app.listen(PORT, () => console.log('server working' + PORT));
+        server.listen(PORT, () => console.log('server working' + PORT));
     } catch(e) {
         console.log(e)
     }
