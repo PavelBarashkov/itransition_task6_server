@@ -13,14 +13,13 @@ const WebSocket = require( "ws");
 
 const PORT = process.env.PORT || 5000;
 
-const app = express();
+const server = http.createServer();
+
+const app = express({server});
 
 
 
-
-
-
-const webSocketServer = new WebSocket.Server({ port: 3000});
+const webSocketServer = new WebSocket.Server({noServer: true});
 webSocketServer.on('connection', ws => {
     ws.on('message', function (message) {
         message = JSON.parse(message);
@@ -33,6 +32,13 @@ webSocketServer.on('connection', ws => {
       });
 
 });
+
+
+server.on('upgrade', (request, socket, head) => {
+    webSocketServer.handleUpgrade(request, socket, head, (ws) => {
+        webSocketServer.emit('connection', ws, request)
+    })
+})
 
 app.use(cors());
 app.use(express.json());
