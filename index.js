@@ -19,8 +19,8 @@ const app = express();
 
 
 
-const server = http.createServer(app);
-const webSocketServer = new WebSocket.Server({ server });
+
+const webSocketServer = new WebSocket.Server({ port: 3000});
 webSocketServer.on('connection', ws => {
     ws.on('message', function (message) {
         message = JSON.parse(message);
@@ -33,7 +33,6 @@ webSocketServer.on('connection', ws => {
       });
 
 });
- server.listen(3000, () => console.log("Подключение установленно"))
 
 app.use(cors());
 app.use(express.json());
