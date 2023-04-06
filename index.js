@@ -14,29 +14,35 @@ const WebSocket = require( "ws");
 const PORT = process.env.PORT || 5000;
 
 const app = express();
-app.use(cors());
 
 
 
 
 
-const webSocketServer = new WebSocket.Server({ app });
+const server = http.createServer(app);
+const webSocketServer = new WebSocket.Server({ server });
 webSocketServer.on('connection', ws => {
     ws.on('message', function (message) {
         message = JSON.parse(message);
-      
+
         if (message.event === 'connection') {
           ws.id = message.id;
-          console.log(message)
         } else if (message.event === 'message') {
           broadcastMessage(message, message.recipient)
         }
       });
 
 });
+ server.listen(8999, () => console.log("Подключение установленно"))
 
+app.use(cors());
 app.use(express.json());
 app.use('/api', router);
+
+
+
+
+
 
 app.use(errorHandler);
 const start = async () => {
