@@ -14,6 +14,7 @@ const WebSocket = require( "ws");
 const PORT = process.env.PORT || 5000;
 
 const app = express();
+app.use(cors());
 
 
 
@@ -36,14 +37,8 @@ webSocketServer.on('connection', ws => {
 });
  server.listen(8999, () => console.log("Подключение установленно"))
 
-app.use(cors());
 app.use(express.json());
 app.use('/api', router);
-
-
-
-
-
 
 app.use(errorHandler);
 const start = async () => {
