@@ -33,7 +33,7 @@ webSocketServer.on('connection', ws => {
       });
 
 });
- server.listen(8999, () => console.log("Подключение установленно"))
+ server.listen(3000, () => console.log("Подключение установленно"))
 
 app.use(cors());
 app.use(express.json());
