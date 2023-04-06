@@ -27,6 +27,7 @@ webSocketServer.on('connection', ws => {
       
         if (message.event === 'connection') {
           ws.id = message.id;
+          console.log(message)
         } else if (message.event === 'message') {
           broadcastMessage(message, message.recipient)
         }
