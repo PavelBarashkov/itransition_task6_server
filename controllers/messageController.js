@@ -49,7 +49,6 @@ class messageController{
 
     }
 
-
     // Получить все сообщения для пользователя где он получатель
     async getMessagesRecipient(req, res) {
         try {
@@ -83,11 +82,6 @@ class messageController{
                 console.log(e);
               }
             }
-
-
 }
-
-
-
 
 module.exports = new messageController();
