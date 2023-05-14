@@ -18,6 +18,7 @@ const webSocketServer = new WebSocket.Server({noServer: true});
 
 
 webSocketServer.on('connection', ws => {
+    
     ws.on('message', function (message) {
         message = JSON.parse(message);
         if (message.event === 'connection') {
@@ -26,7 +27,6 @@ webSocketServer.on('connection', ws => {
           broadcastMessage(message, message.recipient)
         }
       });
-
 });
 
 server.on('upgrade', (request, socket, head) => {
